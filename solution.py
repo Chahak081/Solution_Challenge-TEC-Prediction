@@ -61,23 +61,8 @@ corr_matrix = df[numeric_vars].corr()
 sns.heatmap(corr_matrix, cmap='coolwarm', annot=True, fmt='.2f', square=True)
 plt.savefig('correlation.png')
 #plt.show()
-'''
-#Build an LSTM model
-lstm_model = Sequential()
-lstm_model.add(LSTM(units=128, input_shape=(X_train.shape[1], X_train.shape[2])))
-lstm_model.add(Dropout(0.2))
-lstm_model.add(Dense(units=1))
 
-#Compile the model
-lstm_model.compile(optimizer='adam', loss='mae')
-lstm_model.summary()
 
-keras.utils.plot_model(lstm_model, to_file='plot_lstm.png', show_layer_names=True)
-print("PLOT HAS BEEN GENERATED, PLEASE CHECK YOUR DIRECTORY")
-
-#Fit the model to the training data
-history_lstm = lstm_model.fit(X_train, y_train, epochs=150, batch_size=32, validation_data=(X_val, y_val))
-'''
 
 # Build an LSTM model
 lstm_model = Sequential()
@@ -102,88 +87,7 @@ history_lstm = lstm_model.fit(X_train, y_train, epochs=200, batch_size=64, valid
 # Load the best saved model
 lstm_model.load_weights('best_lstm_model1.h5')
 
-'''
-# Build an LSTM model
-lstm_model = Sequential()
-lstm_model.add(LSTM(units=256, input_shape=(X_train.shape[1], X_train.shape[2]), return_sequences=True))
-lstm_model.add(Dropout(0.3))
-lstm_model.add(LSTM(units=128))
-lstm_model.add(Dropout(0.2))
-lstm_model.add(Dense(units=1))
 
-# Compile the model
-lstm_model.compile(optimizer='adam', loss='mse', metrics=['mae'])
-lstm_model.summary()
-
-keras.utils.plot_model(lstm_model, to_file='plot_lstm.png', show_layer_names=True)
-print("PLOT HAS BEEN GENERATED, PLEASE CHECK YOUR DIRECTORY")
-
-# Fit the model to the training data
-#history_lstm = lstm_model.fit(X_train, y_train, epochs=200, batch_size=64, validation_data=(X_val, y_val), verbose=1)
-'''
-
-'''
-# Define the LSTM model architecture
-lstm_model = Sequential([
-    LSTM(units=128, return_sequences=True, input_shape=(X_train.shape[1], X_train.shape[2])),
-    Dropout(0.3),
-    LSTM(units=128, return_sequences=False),
-    Dropout(0.2),
-    Dense(units=1)
-])
-
-# Compile the model
-lstm_model.compile(optimizer='adam', loss='mse', metrics=['mae'])
-lstm_model.summary()
-
-# Define early stopping and model checkpoint callbacks
-early_stopping = EarlyStopping(monitor='val_loss', patience=10, mode='min')
-model_checkpoint = ModelCheckpoint('best_lstm_model.h5', monitor='val_loss', save_best_only=True, mode='min', verbose=1)
-
-# Train the model
-#history = lstm_model.fit(X_train, y_train, epochs=200, batch_size=64, validation_data=(X_val, y_val), callbacks=[early_stopping, model_checkpoint], verbose=1)
-
-# Load the best saved model
-lstm_model.load_weights('best_lstm_model.h5')
-'''
-
-
-# /
-'''
-#256, 0.4,64,200
-# Define the hyperparameters to tune
-param_grid = {
-    'lstm_units': [128, 256, 512],
-    'dropout_rate': [0.2, 0.3, 0.4],
-    'batch_size': [32, 64, 128],
-    'epochs': [150, 200, 250]
-}
-
-# Define the model to use in the GridSearchCV
-def create_model(lstm_units=128, dropout_rate=0.2):
-    lstm_model = Sequential()
-    lstm_model.add(LSTM(units=lstm_units, input_shape=(X_train.shape[1], X_train.shape[2]), return_sequences=True))
-    lstm_model.add(Dropout(dropout_rate))
-    lstm_model.add(LSTM(units=lstm_units))
-    lstm_model.add(Dropout(dropout_rate))
-    lstm_model.add(Dense(units=1))
-    lstm_model.compile(optimizer='adam', loss='mse', metrics=['mae'])
-    return lstm_model
-
-# Create the GridSearchCV object
-grid_search = GridSearchCV(
-    estimator=KerasRegressor(build_fn=create_model, verbose=1),
-    param_grid=param_grid,
-    cv=5
-)
-
-# Fit the GridSearchCV to the training data
-grid_search_results = grid_search.fit(X_train, y_train)
-
-# Print the best hyperparameters and corresponding score
-print(f"Best: {grid_search_results.best_score_:.3f} using {grid_search_results.best_params_}")
-# /
-'''
 # Build an RNN model
 rnn_model = Sequential()
 rnn_model.add(SimpleRNN(units=256, return_sequences = True, input_shape=(X_train.shape[1], X_train.shape[2])))
@@ -423,7 +327,7 @@ ax.plot(np.arange(0, 55, 1), np.arange(0, 55, 1), color='black', linestyle='-')
 #plt.show()
 plt.savefig('fig2.png')
 
-# Plotting the results for Random Rainforest
+# Plotting the results for Random forest
 fig, ax = plt.subplots()
 ax.scatter(y_test, y_test_pred_rf, color='grey')
 ax.set_xlabel('Actual TEC')
