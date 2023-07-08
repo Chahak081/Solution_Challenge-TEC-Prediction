@@ -26,12 +26,9 @@ The code works in any python ide like VSCode, Spyder and etc.
 * The model is compiled with an Adam optimizer and mean squared error loss
 * The model is trained on the training data and evaluated on both the training and validation sets
 
-6)MLP Model:
-* A sequential model with a flatten layer, a dense layer, a dropout layer and a final dense layer is defined
-* The model is compiled with an Adam optimizer and mean squared error loss
-* The model is trained on the training data and evaluated on both the training and validation sets
 
-7)CNN Model:
+
+6)RNN Model:
 * A sequential model with a convolutional layer, a max pooling layer, a dropout layer, a flatten layer and a final dense layer is defined
 * The model is compiled with an Adam optimizer and mean squared error loss
 * The model is trained on the training data and evaluated on both the training and validation sets
@@ -40,7 +37,7 @@ The code works in any python ide like VSCode, Spyder and etc.
 * A linear regression model is defined using scikit-learn
 * The model is trained on the training data and evaluated on both the training and validation sets
 
-9)Decision Tree Model:
+9)Gradient Boosting Model:
 * A decision tree model is defined using scikit-learn
 * The model is trained on the training data and evaluated on both the training and validation sets
 
