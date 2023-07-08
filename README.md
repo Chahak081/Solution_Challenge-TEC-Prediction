@@ -29,7 +29,7 @@ The code works in any python ide like VSCode, Spyder and etc.
 
 
 6)RNN Model:
-* A sequential model with a convolutional layer, a max pooling layer, a dropout layer, a flatten layer and a final dense layer is defined
+* A sequential model with a simpleRNN layer.
 * The model is compiled with an Adam optimizer and mean squared error loss
 * The model is trained on the training data and evaluated on both the training and validation sets
 
@@ -38,7 +38,7 @@ The code works in any python ide like VSCode, Spyder and etc.
 * The model is trained on the training data and evaluated on both the training and validation sets
 
 9)Gradient Boosting Model:
-* A decision tree model is defined using scikit-learn
+* This model is defined using scikit-learn
 * The model is trained on the training data and evaluated on both the training and validation sets
 
 10)Random Forest Model:
